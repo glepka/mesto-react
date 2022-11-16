@@ -1,22 +1,34 @@
-export default function PopupWithForm(props) {
+export default function PopupWithForm({
+  name,
+  title,
+  children,
+  buttonText,
+  onClose,
+  isOpen,
+}) {
+  const handlerOverlayClick = (e) => {
+    if (e.target === e.currentTarget) onClose();
+  };
+
   return (
     <div
-      className={`popup popup_type_${props.name} 
-      ${props.isOpen && "popup_opened"}`}
+      className={`popup popup_type_${name} 
+      ${isOpen && "popup_opened"}`}
+      onClick={handlerOverlayClick}
     >
       <div className="popup__container">
-        <h3 className="popup__title">{props.title}</h3>
-        <form className="form" name={props.name} autoComplete="off" noValidate>
-          {props.children}
+        <h3 className="popup__title">{title}</h3>
+        <form className="form" name={name} autoComplete="off" noValidate>
+          {children}
           <button className="form__submit-btn" type="submit">
-            {props.buttonText}
+            {buttonText}
           </button>
         </form>
         <button
           className="popup__cross"
           type="button"
           aria-label="Закрыть форму."
-          onClick={props.onClose}
+          onClick={onClose}
         ></button>
       </div>
     </div>

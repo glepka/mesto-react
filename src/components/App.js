@@ -3,12 +3,13 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState();
+  const [selectedCard, setSelectedCard] = useState(false);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -102,6 +103,40 @@ function App() {
             <span className="form__input-error profession-input-error"></span>
           </label>
         </PopupWithForm>
+        <PopupWithForm
+          name="place"
+          title="Новое место"
+          buttonText="Сохранить"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        >
+          <label className="form__field">
+            <input
+              id="place-input"
+              type="text"
+              placeholder="Место"
+              className="form__text form__text_type_place"
+              name="place"
+              required
+              minLength="2"
+              maxLength="30"
+            />
+            <span className="form__input-error place-input-error"></span>
+          </label>
+          <label className="form__field">
+            <input
+              id="link-input"
+              type="url"
+              placeholder="Ссылка на картинку"
+              className="form__text form__text_type_link"
+              name="link"
+              required
+            />
+            <span className="form__input-error link-input-error"></span>
+          </label>
+        </PopupWithForm>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <PopupWithForm name="delete-card" title="Вы уверены?" buttonText="Да" />
       </div>
     </div>
   );

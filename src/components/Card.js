@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { CurrentUserInfo } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Card({ data, onCardClick, onCardLike, onCardDelete }) {
-  const user = useContext(CurrentUserInfo);
+  const user = useContext(CurrentUserContext);
   const isOwn = data.owner._id === user._id;
   const isLiked = data.likes.some((i) => i._id === user._id);
   const cardLikeButtonClassName = `${
@@ -17,7 +17,7 @@ export default function Card({ data, onCardClick, onCardLike, onCardDelete }) {
     onCardLike(data);
   };
 
-  const handleTrashClick = () => {
+  const handleCardDelete = () => {
     onCardDelete(data);
   };
 
@@ -26,8 +26,9 @@ export default function Card({ data, onCardClick, onCardLike, onCardDelete }) {
       {isOwn && (
         <button
           className="elements__trash"
-          id="trash"
-          onClick={handleTrashClick}
+          type="button"
+          aria-label="Удалить"
+          onClick={handleCardDelete}
         ></button>
       )}
 
@@ -42,7 +43,6 @@ export default function Card({ data, onCardClick, onCardLike, onCardDelete }) {
         <div className="elements__like-container">
           <button
             className={cardLikeButtonClassName}
-            id="like"
             onClick={handleLikeClick}
           ></button>
           <span className="elements__like-counter">{data.likes.length}</span>

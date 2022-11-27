@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CurrentUserInfo } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import pencil from "../images/pencil.svg";
 import plus from "../images/plus.svg";
 import Card from "./Card";
@@ -13,7 +13,7 @@ export default function Main({
   onCardDelete,
   cards,
 }) {
-  const user = useContext(CurrentUserInfo);
+  const user = useContext(CurrentUserContext);
 
   return (
     <main>
@@ -34,7 +34,7 @@ export default function Main({
                 <img src={pencil} alt="Карандаш" className="profile__icon" />
               </button>
             </div>
-            <p className="profile__subtitle">{user.abou}</p>
+            <p className="profile__subtitle">{user.about}</p>
           </div>
         </div>
         <button

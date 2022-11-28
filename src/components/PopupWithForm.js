@@ -6,6 +6,7 @@ export default function PopupWithForm({
   onClose,
   isOpen,
   onSubmit,
+  isLoading,
 }) {
   const handlerOverlayClick = (e) => {
     if (e.target === e.currentTarget) onClose();
@@ -27,7 +28,11 @@ export default function PopupWithForm({
           onSubmit={onSubmit}
         >
           {children}
-          <button className="form__submit-btn" type="submit">
+          <button
+            className="form__submit-btn"
+            type="submit"
+            disabled={isLoading}
+          >
             {buttonText}
           </button>
         </form>
